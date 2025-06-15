@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axios from "axios";
 const loanTypes = [
   'Personal Loan',
   'Gold Loan',
@@ -418,14 +418,31 @@ const EnquireNow = () => {
     setCurrentStep(prev => prev - 1);
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validateStep(3)) {
+  //     // Handle form submission
+  //     console.log('Form submitted:', form);
+  //     // You can add API call here
+  //   }
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateStep(3)) {
-      // Handle form submission
-      console.log('Form submitted:', form);
-      // You can add API call here
+      const formData = new FormData();
+      for (const key in form) {
+        formData.append(key, form[key] || '');
+      }
+  
+      try {
+        const res = await axios.post("http://localhost:8000/send-email", formData);
+        console.log(res.data);
+      } catch (err) {
+        console.error("Failed to send email:", err);
+      }
     }
   };
+  
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
