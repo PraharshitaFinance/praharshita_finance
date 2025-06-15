@@ -1,0 +1,12 @@
+# Exported from Render on 2025-06-15T09:00:43Z
+services:
+- type: web
+  name: praharshita
+  runtime: node
+  repo: https://github.com/NuthanaKolla/praharshita2
+  plan: free
+  region: oregon
+  buildCommand: pnpm install --frozen-lockfile
+  startCommand: node eslint.config.js
+  autoDeployTrigger: commit
+version: "1"
