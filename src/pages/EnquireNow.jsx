@@ -418,14 +418,36 @@ const EnquireNow = () => {
     setCurrentStep(prev => prev - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateStep(3)) {
-      // Handle form submission
-      console.log('Form submitted:', form);
-      // You can add API call here
+  
+    if (!validateStep(3)) return;
+  
+    try {
+      const response = await fetch("https://formspree.io/f/mjkrrprl", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(form), // Sends your existing form object
+      });
+  
+      if (response.ok) {
+        navigate("/success");
+        // alert("Message sent successfully!");
+      } else {
+        const data = await response.json();
+        console.error(data);
+        alert("Error submitting the form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Something went wrong.");
     }
   };
+  
+  
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   if (validateStep(3)) {

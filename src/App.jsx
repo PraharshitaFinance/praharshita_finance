@@ -21,7 +21,7 @@ import LoanCalculator from './pages/discover/LoanCalculator';
 import InvestmentTips from './pages/discover/InvestmentTips';
 import CreditScore from './pages/discover/CreditScore';
 import EnquireNow from './pages/EnquireNow';
-
+import Success from "./pages/success";
 // Page transition variants
 const pageVariants = {
   initial: {
@@ -122,6 +122,7 @@ function App() {
               <Route path="discover/loan-calculator" element={<LoanCalculator />} />
               <Route path="discover/investment-tips" element={<InvestmentTips />} />
               <Route path="discover/credit-score" element={<CreditScore />} />
+              <Route path="/success" element={<Success />} />
             </Route>
           </Routes>
         </>
